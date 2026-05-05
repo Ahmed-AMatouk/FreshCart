@@ -39,7 +39,8 @@ export async function createVisaOrder(cartId: string|null,orderShipping: orderSh
 }
 
 export async function getAllOrders():Promise<orderResponse[]> {
-    const {token,id} = (await getMyToken())
+    const token = (await getMyToken())?.token
+    const id = (await getMyToken())?.id
     const res = await fetch(`https://ecommerce.routemisr.com/api/v1/orders/user/${id}`, {
         method: "get",
         headers: {
