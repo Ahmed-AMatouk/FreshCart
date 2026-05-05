@@ -7,7 +7,7 @@ import { useContext } from 'react';
 import { CartItemsContext } from '../_context/CartContextProvider';
 
 export default function AddToCartBtn({productId}:{productId:string}) {
-     const {setdataOfCartItems} = useContext(CartItemsContext)
+     const {setdataOfCartItems} = useContext(CartItemsContext)!
      async function AddItemToCartHandle(){
          try {
             const data = await AddItemToCart(productId)

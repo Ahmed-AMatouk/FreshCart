@@ -3,7 +3,7 @@
 import { CartResponseType } from "@/types/cart.type";
 import { getMyToken } from "@/utils/getMyToken"
 
-export async function clearItemsFromCart() : Promise<CartResponseType|null>{
+export async function clearItemsFromCart() : Promise<CartResponseType>{
     const {token} = await getMyToken()
     const res = await fetch(`https://ecommerce.routemisr.com/api/v2/cart`,{
         method:"DELETE",

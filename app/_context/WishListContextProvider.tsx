@@ -4,7 +4,7 @@ import { getLoggedUserWishList } from "../_actions/getLoggedUserWishList";
 import { getLoggedUserWishListType } from "@/types/wishList";
 
 
-export const WishListItemsContext = createContext({})
+export const WishListItemsContext = createContext<wishlistContextType|null>(null)
 export default function WishListContextProvider({ children }: { children: ReactNode }) {
   const [dataOfWishListItems, setdataOfWishListItems] = useState<getLoggedUserWishListType>();
   const [loadingContext, setLoadingContext] = useState(true);
@@ -24,3 +24,9 @@ export default function WishListContextProvider({ children }: { children: ReactN
     </WishListItemsContext.Provider>
   )
 }
+
+interface wishlistContextType{
+  dataOfWishListItems:getLoggedUserWishListType | undefined, 
+  RefreshWishListData:()=>void, 
+  loadingContext:boolean
+ }

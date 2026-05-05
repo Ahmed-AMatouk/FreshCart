@@ -7,7 +7,7 @@ import { FaTrash } from 'react-icons/fa6';
 import { RotatingLines } from 'react-loader-spinner';
 
 export default function DeleteItemFromWishList({ id }: { id: string }) {
-    const { RefreshWishListData } = useContext(WishListItemsContext)
+    const { RefreshWishListData } = useContext(WishListItemsContext)!
     const [Deleteloading, setDeleteloading] = useState(false)
     async function DeleteItemFromWishListHandle() {
         setDeleteloading(true)

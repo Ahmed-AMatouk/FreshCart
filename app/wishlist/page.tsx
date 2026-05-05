@@ -11,7 +11,7 @@ import DeleteItemFromWishList from "../_components/DeleteWishItem";
 import AddCartItem from "../_components/AddCartItem";
 
 export default function Page() {
-    const { dataOfWishListItems, loadingContext } = useContext(WishListItemsContext)
+    const { dataOfWishListItems, loadingContext } = useContext(WishListItemsContext)!
     
          
     

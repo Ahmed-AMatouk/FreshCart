@@ -10,7 +10,7 @@ import { FaHeart } from 'react-icons/fa6';
 import { DeleteFromWishList } from '../_actions/deleteFromWishList.action';
 
 export default function AddToWishListBtn({ productId }: { productId: string }) {
-    const { dataOfWishListItems, RefreshWishListData } = useContext(WishListItemsContext)
+    const { dataOfWishListItems, RefreshWishListData } = useContext(WishListItemsContext)!
     const WishListItems: product[] = dataOfWishListItems?.data || []
     const isWishList: boolean = WishListItems.some((item) => item._id === productId)
     const [loadingBtn, setLoadingBtn] = useState(false);

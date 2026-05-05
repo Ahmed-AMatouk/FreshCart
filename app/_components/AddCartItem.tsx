@@ -4,14 +4,15 @@ import { AddItemToCart } from '../_actions/addToCart.action'
 import { toast } from 'sonner';
 import { useContext, useState } from 'react';
 import { CartItemsContext } from '../_context/CartContextProvider';
+import { CartResponseType } from '@/types/cart.type';
 
 export default function AddCartItem({ id }: { id: string }) {
-    const { setdataOfCartItems } = useContext(CartItemsContext)
+    const { setdataOfCartItems } = useContext(CartItemsContext)!
     const [loadingAddToCart, setloadingAddToCart] = useState(false)
     async function AddItemToCartHandle() {
         setloadingAddToCart(true)
         try {
-            const data = await AddItemToCart(id)
+            const data : CartResponseType = await AddItemToCart(id)
             console.log(data);
             setdataOfCartItems(data)
             toast.success(data?.message, { position: "top-center", richColors: true })

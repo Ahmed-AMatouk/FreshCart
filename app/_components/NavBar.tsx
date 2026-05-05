@@ -4,11 +4,9 @@ import {useContext, useState}  from "react"
 import Link from "next/link"
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 import { IoHeadset, IoSearchSharp } from "react-icons/io5"
 import { FaRegUserCircle, FaShoppingCart } from "react-icons/fa"
@@ -21,7 +19,7 @@ import { CartItemsContext } from "../_context/CartContextProvider"
 export default function NavBar() {
   const session = useSession()
   console.log(session.data);
-  const {dataOfCartItems} = useContext(CartItemsContext)
+  const {dataOfCartItems} = useContext(CartItemsContext)!
   const numberOfCartItems = dataOfCartItems?.numOfCartItems
   const [listUserData, setlistUserData] = useState(false)
   return (
@@ -124,22 +122,3 @@ export default function NavBar() {
   )
 }
 
-function ListItem({
-  title,
-  children,
-  href,
-  ...props
-}: React.ComponentPropsWithoutRef<"li"> & { href: string }) {
-  return (
-    <li {...props}>
-      <NavigationMenuLink asChild>
-        <Link href={href}>
-          <div className="flex flex-col gap-1 text-sm">
-            <div className="leading-none font-medium">{title}</div>
-            <div className="line-clamp-2 text-muted-foreground">{children}</div>
-          </div>
-        </Link>
-      </NavigationMenuLink>
-    </li>
-  )
-}

@@ -4,7 +4,7 @@ import { CartItemsContext } from '../_context/CartContextProvider'
 import Link from 'next/link'
 import { ArrowRight, ShoppingCart } from 'lucide-react'
 import { FaBagShopping, FaBoxOpen, FaLock, FaShieldHalved, FaTag, FaTrash, FaTruck } from 'react-icons/fa6'
-import { CartItemType } from '@/types/cart.type'
+import { CartItemType, CartResponseType } from '@/types/cart.type'
 import ItemInCart from '../_components/itemInCart'
 import { toast } from 'sonner'
 import { clearItemsFromCart } from '../_actions/clearItemsFromCart'
@@ -12,14 +12,14 @@ import { RotatingLines } from 'react-loader-spinner'
 import LoadingComponent from '../_components/LoadingComponent'
 
 export default function Page() {
-    const { dataOfCartItems,setdataOfCartItems,loadingContext} = useContext(CartItemsContext)
+    const { dataOfCartItems,setdataOfCartItems,loadingContext} = useContext(CartItemsContext)!
     const [loadingClear, setloadingClear] = useState(false)
     console.log(dataOfCartItems);
     
     async function clearItems(){
         setloadingClear(true)
         try {
-            const res = await clearItemsFromCart()
+            const res:CartResponseType = await clearItemsFromCart()
             console.log(res);
             setdataOfCartItems(res)
             toast.success("Cart has been cleared successfuly", { position: "top-center", richColors: true })

@@ -13,7 +13,7 @@ import { ArrowRight } from 'lucide-react'
 import LoadingComponent from '../_components/LoadingComponent'
 
 export default function Page() {
-    const { dataOfCartItems, setdataOfCartItems,loadingContext } = useContext(CartItemsContext)
+    const { dataOfCartItems, setdataOfCartItems,loadingContext } = useContext(CartItemsContext)!
     const { register, handleSubmit, formState } = useForm({
         defaultValues: {
             details: '',

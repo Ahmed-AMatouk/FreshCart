@@ -4,11 +4,10 @@ import { CartResponseType } from "@/types/cart.type";
 import { getMyToken } from "@/utils/getMyToken"
 import { redirect } from "next/navigation";
 
-export async function AddItemToCart(id:string) : Promise<CartResponseType|null>{
+export async function AddItemToCart(id:string) : Promise<CartResponseType>{
     const {token} = await getMyToken()
     if (!token) {
         redirect("/login")
-        return null
     }
     const res = await fetch("https://ecommerce.routemisr.com/api/v2/cart",{
         method:"Post",

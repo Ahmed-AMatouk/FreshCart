@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react'
 import { CartItemsContext } from '../_context/CartContextProvider'
 import Link from 'next/link'
 import {FaCheck,FaMinus, FaPlus, FaTrash } from 'react-icons/fa6'
-import { CartItemType } from '@/types/cart.type'
+import { CartItemType, CartResponseType } from '@/types/cart.type'
 import Image from 'next/image'
 import { deleteItemFromCart } from '../_actions/deleteItemFromCart'
 import { toast } from 'sonner'
@@ -11,7 +11,7 @@ import { RotatingLines } from 'react-loader-spinner'
 import { updateItemFromCart } from '../_actions/updateItemFromCart'
 
 export default function ItemInCart({item}:{item:CartItemType}) {
-     const { dataOfCartItems, setdataOfCartItems } = useContext(CartItemsContext)
+     const { dataOfCartItems, setdataOfCartItems } = useContext(CartItemsContext)!
         const [loadingDelete, setloadingDelete] = useState(false)
         const [loadingUpdate, setloadingUpdate] = useState(false)
         console.log(dataOfCartItems);
@@ -19,7 +19,7 @@ export default function ItemInCart({item}:{item:CartItemType}) {
         async function deleteItem(id: string) {
             setloadingDelete(true)
             try {
-                const res = await deleteItemFromCart(id)
+                const res :CartResponseType = await deleteItemFromCart(id)
                 console.log(res);
                 setdataOfCartItems(res)
                 toast.success(res?.message, { position: "top-center", richColors: true })
@@ -34,7 +34,7 @@ export default function ItemInCart({item}:{item:CartItemType}) {
         async function updateItem(id:string,count:number){
             setloadingUpdate(true)
             try {
-                const res = await updateItemFromCart(id,count)
+                const res:CartResponseType = await updateItemFromCart(id,count)
                 console.log(res);
                 setdataOfCartItems(res)
                 toast.success(res?.message, { position: "top-center", richColors: true })
