@@ -19,7 +19,7 @@ export default function Page() {
 
     return (
 
-        dataOfWishListItems.count ? <div className="min-h-screen bg-gray-50/50">
+        dataOfWishListItems?.count ? <div className="min-h-screen bg-gray-50/50">
             <div className="bg-white border-b border-gray-100">
                 <div className="container mx-auto px-4 py-8">
                     <nav className="flex items-center gap-2 text-sm text-gray-500 mb-4"><Link className="hover:text-green-600 transition-colors" href="/">Home</Link><span>/</span><span className="text-gray-900 font-medium">Wishlist</span></nav>
