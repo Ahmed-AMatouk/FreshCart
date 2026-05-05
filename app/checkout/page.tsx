@@ -27,7 +27,7 @@ export default function Page() {
         console.log(values);
         setloadingOrder(true)
         try {
-            const res = await createCashOrder(dataOfCartItems?.cartId, { shippingAddress: values })
+            const res = await createCashOrder(dataOfCartItems?.cartId??null, { shippingAddress: values })
             console.log(res);
             const itemsCart = await getLoggedUserCart()
             setdataOfCartItems(itemsCart)
@@ -42,7 +42,7 @@ export default function Page() {
         console.log(values);
         setloadingOrder(true)
         try {
-            const res = await createVisaOrder(dataOfCartItems?.cartId, { shippingAddress: values })
+            const res = await createVisaOrder(dataOfCartItems?.cartId??null, { shippingAddress: values })
             console.log(res);
             window.open(res.session.url,"self")
         } catch (error) {

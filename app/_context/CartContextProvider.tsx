@@ -5,7 +5,7 @@ import { CartResponseType } from "@/types/cart.type";
 
 export const CartItemsContext = createContext<CartItemsContextType|null>(null)
 export default function CartContextProvider({children}:{children:ReactNode}){
-  const [dataOfCartItems, setdataOfCartItems] = useState<CartResponseType>();
+  const [dataOfCartItems, setdataOfCartItems] = useState<CartResponseType|null>(null);
 const [loadingContext, setLoadingContext] = useState(true);
 useEffect(() => {
   getLoggedUserCart().then((itemsCart) => {
@@ -21,7 +21,7 @@ useEffect(() => {
 }
 
 export interface CartItemsContextType {
-  dataOfCartItems: CartResponseType | undefined,
+  dataOfCartItems: CartResponseType|null,
   setdataOfCartItems: (value: CartResponseType) => void,
   loadingContext:boolean
 }
