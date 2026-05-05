@@ -5,7 +5,7 @@ import { getMyToken } from "@/utils/getMyToken"
 import { redirect } from "next/navigation";
 
 export async function AddToWishList(id:string) : Promise<wishlistRes|null>{
-    const {token} = await getMyToken()
+    const token = (await getMyToken())?.token
     if (!token) {
         redirect("/login")
         return null

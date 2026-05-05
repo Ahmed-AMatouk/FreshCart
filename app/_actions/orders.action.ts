@@ -10,7 +10,7 @@ interface orderShippingType {
     }
 }
 export async function createCashOrder(cartId: string|null , orderShipping: orderShippingType) {
-    const {token} = await getMyToken()
+    const token = (await getMyToken())?.token
     const res = await fetch(`https://ecommerce.routemisr.com/api/v2/orders/${cartId}`, {
         method: "POST",
         headers: {
@@ -24,7 +24,7 @@ export async function createCashOrder(cartId: string|null , orderShipping: order
 }
 
 export async function createVisaOrder(cartId: string|null,orderShipping: orderShippingType) {
-    const {token} = await getMyToken()
+    const token = (await getMyToken())?.token
     
     const res = await fetch(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=${process.env.URL!}`, {
         method: "POST",

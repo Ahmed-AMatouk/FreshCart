@@ -5,7 +5,7 @@ import { getMyToken } from "@/utils/getMyToken"
 import { redirect } from "next/navigation";
 
 export async function AddItemToCart(id:string) : Promise<CartResponseType>{
-    const {token} = await getMyToken()
+    const token = (await getMyToken())?.token
     if (!token) {
         redirect("/login")
     }
