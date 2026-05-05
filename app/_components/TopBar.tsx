@@ -1,12 +1,19 @@
+"use client"
 import React from 'react'
-import { FaGift } from "react-icons/fa6";
+import { FaGift, FaUser } from "react-icons/fa6";
 import { FaTruck } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdMailOutline } from "react-icons/md";
 import { FaUserPlus } from "react-icons/fa6";
 import { FaRegUser } from "react-icons/fa6";
 import Link from 'next/link';
+import { signOut, useSession } from 'next-auth/react';
+import { PiSignOutBold } from 'react-icons/pi';
 export default function TopBar() {
+    const session = useSession()
+    function handleLogout(){
+        signOut({redirect:true , callbackUrl:"/"})
+    }
   return (
     <section className='hidden lg:flex items-center justify-between px-4 py-2 text-[#6A7282] border-b border-b-[#F3F4F6] text-[14px]'>
         <div className="flex items center gap-6">
@@ -31,6 +38,18 @@ export default function TopBar() {
                 </div>
             </div>
             <span className="w-px h-4 bg-gray-200"></span>
+            {session.data?
+                <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2 cursor-pointer hover:text-[#16A34A]">
+                        <FaUser />
+                        <Link href="/profile">{session.data?.user?.name}</Link>
+                    </div>
+                    <div className="flex items-center gap-2 cursor-pointer hover:text-red-500">
+                        <PiSignOutBold />
+                        <button onClick={handleLogout} className='cursor-pointer'>Sign out</button>
+                    </div>
+                </div>
+            :
             <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2 cursor-pointer hover:text-[#16A34A]">
                     <FaRegUser/>
@@ -41,7 +60,7 @@ export default function TopBar() {
                     <Link href="/signup">Sign Up</Link>
                 </div>
 
-            </div>
+            </div>}
         </div>
 
     </section>

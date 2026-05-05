@@ -11,7 +11,7 @@ export default async function Page({params}:Props) {
     const {id} = await params
     const product:product = await getProductDetails(id)
     console.log(product);
-    const relatedProduts = (await getAllProducts()).filter((Filteredproduct)=>product.category.name === Filteredproduct.category.name && product._id !== Filteredproduct._id)
+    const relatedProduts = (await getAllProducts()).filter((Filteredproduct)=>product?.category?.name === Filteredproduct?.category?.name && product._id !== Filteredproduct._id)
     
     return (
         <main>

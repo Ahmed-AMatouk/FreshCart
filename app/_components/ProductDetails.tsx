@@ -21,7 +21,7 @@ export default function ProductDetails({product}:propsOfProduct) {
                     <div className="flex flex-col lg:flex-row gap-8">
                         <div id="product-images" className="lg:w-1/4">
                             <div className="bg-white rounded-xl shadow-sm p-4 sticky top-4">
-                                <ItemSlider images={product.images}/>
+                                <ItemSlider images={product?.images}/>
                             </div>
                         </div>
                         <div id="product-info" className="lg:w-3/4">

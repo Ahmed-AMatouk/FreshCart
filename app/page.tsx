@@ -10,20 +10,26 @@ import Image from "next/image";
 import { getAllProducts } from '@/services/getAllProducts'
 import image from "../assets/images/HeroSection.png"
 import Product from "./_components/Product";
+import { getMyToken } from "@/utils/getMyToken";
 
 export default async function Home() {
+  
+  
+    
+
   const images = [
    {img:image.src,header:"Fresh Products Delivered to your Door",text:"Get 20% off your first order",buttons:[{color:"text-green-500",text:"Shop Now"},{text:"View Deals"}]}
   ,{img:image.src,header:"Premium Quality Guaranteed",text:"Fresh from farm to your table",buttons:[{color:"text-blue-500",text:"Shop Now"},{text:"Learn More"}]}
   ,{img:image.src,header:"Fast & Free Delivery",text:"same day delivery available",buttons:[{color:"text-purple-500",text:"Order Now"},{text:"Delivery Info"}]}]
   const categories: category[] = await getAllCategories()
   const products: product[] = await getAllProducts()
+  
   return (
     <main>
       <section className="relative overflow-hidden">
         <HomeSlider
         images={images} 
-        spaceBetween={0} 
+        spaceBetween={0}
         slidesPerView={1}/>
       </section>
 

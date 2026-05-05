@@ -4,6 +4,10 @@ import TopBar from "./_components/TopBar";
 import { Exo } from 'next/font/google'
 import NavBar from "./_components/NavBar";
 import Footer from "./_components/Footer";
+import { Toaster } from "sonner";
+import MySessionProvider from "./_providers/MySessionProvider";
+import CartContextProvider from "./_context/CartContextProvider";
+import WishListContextProvider from "./_context/WishListContextProvider";
 
 const exo = Exo({
   subsets: ['latin'],
@@ -22,12 +26,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <title>Fresh Cart</title>
+      </head>
       <body
-      className={`${exo.className} antialiased`}>
-        <TopBar/>
-        <NavBar/>
-        {children}
-        <Footer/>
+        className={`${exo.className} antialiased`}>
+        <MySessionProvider>
+          <CartContextProvider>
+            <WishListContextProvider>
+              <TopBar />
+              <NavBar />
+              {children}
+              <Toaster />
+              <Footer />
+            </WishListContextProvider>
+          </CartContextProvider>
+        </MySessionProvider>
       </body>
     </html>
   );

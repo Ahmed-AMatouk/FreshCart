@@ -35,7 +35,7 @@ export default function ItemSlider({images}:ItemSliderProps){
                 return <SwiperSlide key={idx}><img className='h-full w-full object-contain object-center' src={img} alt='Image Item' /></SwiperSlide>
         })}
         </Swiper>
-        <div style={{ transform: `translateX(-${idx * 30}px)`,transition: `transform 0.5s ease;` }} className="custom-pagination w-120! mx-auto mt-3 px-4"></div>
+        <div style={{ transform: `translateX(-${idx * 30}px)`,transition: `transform 0.5s ease` }} className="custom-pagination w-120! mx-auto mt-3 px-4"></div>
     </div>
   );
 };

@@ -2,10 +2,11 @@ import { product } from '@/types/product.type'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { FaPlus, FaRegEye, FaRegStar, FaStar } from 'react-icons/fa6'
+import {FaRegEye, FaRegStar, FaStar } from 'react-icons/fa6'
 import { FiRefreshCw } from 'react-icons/fi'
-import { IoHeartOutline } from 'react-icons/io5'
 import { PiStarHalfDuotone } from 'react-icons/pi'
+import AddToCartBtn from './AddToCartBtn'
+import AddToWishListBtn from './AddToWishListBtn'
 
 interface productProps{
     product:product
@@ -17,9 +18,7 @@ export default async function Product({product}:productProps) {
             <div className="relative"><Image width={240} height={273} className="w-full h-70 object-contain bg-white mx-auto" alt={product.description} src={product.imageCover} />
                 <div className="absolute top-3 left-3">{product.priceAfterDiscount ?<span className="bg-red-500 text-white text-xs px-2 py-1 rounded">{ `${Math.round((product.priceAfterDiscount/product.price)*100) -100}%`}</span>:""}</div>
                 <div className="absolute top-3 right-3 flex flex-col space-y-2">
-                    <button className="cursor-pointer bg-white h-8 w-8 rounded-full flex items-center justify-center transition shadow-sm text-gray-600 hover:text-red-500" title="Add to wishlist" tabIndex={0}>
-                        <IoHeartOutline className="font-bold text-xl" />
-                    </button>
+                    <AddToWishListBtn productId={product._id}/>
                     <button className="cursor-pointer bg-white h-8 w-8 rounded-full flex items-center justify-center text-gray-600 hover:text-green-600 shadow-sm">
                         <FiRefreshCw className="font-bold text-xl"/>
                     </button>
@@ -42,9 +41,7 @@ export default async function Product({product}:productProps) {
                 <div className="flex items-center justify-between">
                     <div><span className={`text-lg font-bold ${product.priceAfterDiscount ?"text-green-600":"text-[#1E2939]"}`}>{product.priceAfterDiscount ?  product.priceAfterDiscount:product.price} EGP</span>
                     <span className="text-sm text-gray-500 line-through ml-2">{product.priceAfterDiscount ?  `${product.price} EGP`:""} </span></div>
-                    <button className="cursor-pointer h-10 w-10 rounded-full flex items-center justify-center transition bg-green-600 text-white hover:bg-green-700 disabled:opacity-70" tabIndex={0}>
-                        <FaPlus />
-                    </button>
+                    <AddToCartBtn productId={product._id}/>
                 </div>
             </div>
         </div>
