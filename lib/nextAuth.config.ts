@@ -57,11 +57,27 @@ export const nextAuthConfig: NextAuthOptions = {
 
 }
 
-declare module "next-auth/jwt" {
-    interface JWT {
-        email: string,
-        name: string,
-        token: string,
-        id: string
+
+
+declare module "next-auth" {
+  interface User {
+    token: string
+    id: string
+  }
+
+  interface Session {
+    user: {
+      id: string
+      token: string
+      name?: string | null
+      email?: string | null
     }
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    token?: string
+    id?: string
+  }
 }
