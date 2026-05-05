@@ -29,10 +29,8 @@ export const nextAuthConfig: NextAuthOptions = {
                         id: decoded.id
                     }
                 }
-                if (!res.ok) {
-                    throw new Error(data.message || "Login failed")
-                    return null;
-                }
+                return null;
+                
             }
         })
     ],
