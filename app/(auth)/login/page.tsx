@@ -1,6 +1,6 @@
 "use client"
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import image from "../../../assets/images/login.png"
 import { FaClock, FaEye, FaEyeSlash, FaFacebook, FaGoogle, FaStar, FaTruck, FaUsers } from 'react-icons/fa6'
 import { FaShieldAlt } from 'react-icons/fa'
@@ -12,8 +12,12 @@ import { loginSchema, SigninType } from './loginSchema'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
+import { CartItemsContext } from '@/app/_context/CartContextProvider'
+import { WishListItemsContext } from '@/app/_context/WishListContextProvider'
 export default function Login() {
   const router = useRouter()
+  const {RefreshCartItems} = useContext(CartItemsContext)!
+  const {RefreshWishListData} = useContext(WishListItemsContext)!
   const [loading, setloading] = useState(false)
   const {register , handleSubmit , formState} = useForm({
       defaultValues:{
@@ -34,9 +38,12 @@ export default function Login() {
       if(res?.error){
           seterror(res.error)
       }else{
+        RefreshCartItems()
+        RefreshWishListData()
         seterror('')
         toast.success("logged in successfully" , {position: "top-right" ,richColors: true})
         router.push("/")
+
       }
       setloading(false)
     }
