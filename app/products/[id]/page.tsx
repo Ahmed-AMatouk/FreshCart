@@ -3,6 +3,7 @@ import RelatedProductsSlider from '@/app/_components/RelatedProductsSlider'
 import { getAllProducts } from '@/services/getAllProducts'
 import { getProductDetails } from '@/services/getProductDetails'
 import { product } from '@/types/product.type'
+import { redirect } from 'next/navigation'
 
 type Props = {
   params: Promise<{ id: string }>
@@ -10,6 +11,7 @@ type Props = {
 export default async function Page({params}:Props) {
     const {id} = await params
     const product:product = await getProductDetails(id)
+    if (!product) redirect("/not-found")
     console.log(product);
     const relatedProduts = (await getAllProducts()).filter((Filteredproduct)=>product?.category?.name === Filteredproduct?.category?.name && product._id !== Filteredproduct._id)
     
