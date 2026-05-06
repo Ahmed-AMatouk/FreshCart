@@ -1,20 +1,24 @@
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
-export default async function proxy(req:NextRequest) {
+export default async function proxy(req: NextRequest) {
     const token = await getToken({
         req,
-        secret: process.env.BETTER_AUTH_SECRET})
+        secret: process.env.BETTER_AUTH_SECRET,
+        cookieName: process.env.NODE_ENV === "production"
+        ? "__Secure-next-auth.session-token"
+        : "next-auth.session-token"
+    })
     console.log("token from midlleware ", token);
-    const ProtectedRoutes = ["/profile" , "/cart" , "/allorders" , "/wishlist" , "/checkout"].some((e)=>{return req.nextUrl.pathname.startsWith(e)})
-    const GuestRoutes = ["/login" , "/signup"].some((e)=>{return req.nextUrl.pathname === e })
-        if(ProtectedRoutes && !token)
-            return NextResponse.redirect(process.env.URL!)
-        if(GuestRoutes && token)
-            return NextResponse.redirect(process.env.URL!)
+    const ProtectedRoutes = ["/profile", "/cart", "/allorders", "/wishlist", "/checkout"].some((e) => { return req.nextUrl.pathname.startsWith(e) })
+    const GuestRoutes = ["/login", "/signup"].some((e) => { return req.nextUrl.pathname === e })
+    if (ProtectedRoutes && !token)
+        return NextResponse.redirect(process.env.URL!)
+    if (GuestRoutes && token)
+        return NextResponse.redirect(process.env.URL!)
     return NextResponse.next()
 }
 
 export const config = {
-    matcher:["/profile" , "/profile/addresses" , "/profile/settings" , "/cart" , "/checkout" , "/wishlist" , "/allorders" , "/login" , "/signup"]
+    matcher: ["/profile", "/profile/addresses", "/profile/settings", "/cart", "/checkout", "/wishlist", "/allorders", "/login", "/signup"]
 }
