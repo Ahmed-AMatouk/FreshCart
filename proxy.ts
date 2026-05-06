@@ -6,7 +6,7 @@ export default async function proxy(req:NextRequest) {
         req,
         secret: process.env.BETTER_AUTH_SECRET})
     console.log("token from midlleware ", token);
-    const ProtectedRoutes = ["/profile" , "/cart" , "/orders" , "/wishlist"].some((e)=>{return req.nextUrl.pathname.startsWith(e)})
+    const ProtectedRoutes = ["/profile" , "/cart" , "/allorders" , "/wishlist" , "/checkout"].some((e)=>{return req.nextUrl.pathname.startsWith(e)})
     const GuestRoutes = ["/login" , "/signup"].some((e)=>{return req.nextUrl.pathname === e })
         if(ProtectedRoutes && !token)
             return NextResponse.redirect(process.env.URL!)
@@ -16,5 +16,5 @@ export default async function proxy(req:NextRequest) {
 }
 
 export const config = {
-    matcher:["/profile" , "/profile/addresses" , "/profile/settings" , "/cart" , "/orders" , "/wishlist" , "/login" , "/signup"]
+    matcher:["/profile" , "/profile/addresses" , "/profile/settings" , "/cart" , "/checkout" , "/wishlist" , "/allorders" , "/login" , "/signup"]
 }
