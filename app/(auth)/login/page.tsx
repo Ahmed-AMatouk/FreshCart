@@ -38,11 +38,12 @@ export default function Login() {
       if(res?.error){
           seterror(res.error)
       }else{
-        RefreshCartItems()
-        RefreshWishListData()
         seterror('')
         toast.success("logged in successfully" , {position: "top-right" ,richColors: true})
+        router.refresh()
         router.push("/")
+        RefreshCartItems()
+        RefreshWishListData()
 
       }
       setloading(false)

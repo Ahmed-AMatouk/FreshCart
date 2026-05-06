@@ -56,7 +56,7 @@ export default function HomeSlider({images , spaceBetween=0 , slidesPerView=1}:S
             <p style={{ opacity: 1, transform: 'none' }} className="text-white">{image.text}</p>
             <div className="mt-4" style={{ opacity: 1, transform: 'none' }}>
               <Link className={`bg-white border-2 border-white/50 ${image.buttons?image.buttons[0].color:""} inline-block px-6 py-2 rounded-lg hover:scale-105 transition-transform`} href="/products">{image.buttons?image.buttons[0].text:""}</Link>
-              <Link className="bg-transparent border-2 border-white/50 text-white ml-2 inline-block px-6 py-2 rounded-lg hover:scale-105 transition-transform" href="/deals">{image.buttons?image.buttons[1].text:""}</Link></div>
+              <Link className="bg-transparent border-2 border-white/50 text-white ml-2 inline-block px-6 py-2 rounded-lg hover:scale-105 transition-transform" href="#">{image.buttons?image.buttons[1].text:""}</Link></div>
           </div>
           
         </div>
