@@ -40,10 +40,10 @@ export default function Login() {
       }else{
         seterror('')
         toast.success("logged in successfully" , {position: "top-right" ,richColors: true})
-        router.refresh()
-        router.push("/")
         RefreshCartItems()
         RefreshWishListData()
+        router.refresh()
+        router.push("/")
 
       }
       setloading(false)
