@@ -39,6 +39,7 @@ export default function Signup() {
       if(data.message === "success"){
         seterror('')
         toast.success("Account created successfully" , {position: "top-right" ,richColors: true})
+        router.refresh()
         router.push("/login")
       }else{
         seterror(data.message)
